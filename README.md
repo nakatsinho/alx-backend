@@ -1,2 +1,3 @@
 # alx-backend
-N/A
+
+This project store ALX Africa backend specialization projects
