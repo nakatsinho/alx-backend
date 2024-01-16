@@ -15,12 +15,12 @@ const values = {
     Portland: '50', Seattle: '80', 'New York': '20', Bogota: '20', Cali: '40', Paris: '2',
 };
 
-keys.forEach((data) => client.hset('HolbertonSchools', data, values[data], redis.print()));
+keys.forEach((data) => client.hset('HolbertonSchools', data, values[data], redis.print));
 
 client.hgetall('HolbertonSchools', (err, value) => {
     if (err) {
-        console.error('error');
+        console.error('An error occurred:', err);
     } else {
-        console.log(value);
+        console.log('Hash values:', value);
     }
-})
+});

@@ -21,12 +21,12 @@ class FIFOCache(BaseCaching):
     def put(self, key, item):
         """
         assign to the dictionary self.cache_data
-        the item value for the key key.
+        the item value for the key
         """
         if key and item:
             if key in self.cache_data:
                 self.cache_data[key] = item
-                return
+                return key
 
             if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
                 item_discarded = self.key_indexes.pop(0)

@@ -17,7 +17,7 @@ class LRUCache(BaseCaching):
     """
 
     def __init__(self):
-        """
+        """"
         Init method
         """
         super().__init__()
@@ -26,7 +26,7 @@ class LRUCache(BaseCaching):
     def put(self, key, item):
         """
         Must assign to the dictionary self.cache_data
-        the item value for the key key.
+        the item value for the key
         """
         if key and item:
             self.lru_order[key] = item
@@ -43,7 +43,7 @@ class LRUCache(BaseCaching):
 
     def get(self, key):
         """
-        Must return the value in self.cache_data linked to key.
+        Must return the value in self.cache_data linked to key
         """
         if key in self.cache_data:
             self.lru_order.move_to_end(key)

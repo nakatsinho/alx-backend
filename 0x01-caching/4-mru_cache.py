@@ -15,6 +15,7 @@ class MRUCache(BaseCaching):
     class MRUCache that inherits
     from BaseCaching and is a caching system
     """
+
     def __init__(self):
         super().__init__()
         self.mru_order = OrderedDict()

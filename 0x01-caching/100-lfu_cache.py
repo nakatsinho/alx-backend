@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-""" caching system
-    """
+"""
+caching System
+"""
 
 from base_caching import BaseCaching
 
 
 class LFUCache(BaseCaching):
-    """ caching system:
+    """
+    caching system:
 
     Args:
         LFUCache ([class]): [basic caching]
@@ -18,7 +20,8 @@ class LFUCache(BaseCaching):
         super().__init__()
 
     def put(self, key, item):
-        """ Add an item in the cache
+        """
+        Add an item in the cache
         """
         if not (key is None or item is None):
             self.cache_data[key] = item
@@ -33,7 +36,8 @@ class LFUCache(BaseCaching):
                 self.temp_list[key] += 1
 
     def get(self, key):
-        """ Get an item by key
+        """
+        Get an item by key
         """
         if (key is None) or not (key in self.cache_data):
             return None

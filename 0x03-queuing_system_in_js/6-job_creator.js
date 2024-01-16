@@ -8,7 +8,7 @@ const job = {
 };
 
 const pushCode = queue.create('push_notification_code', job).save((err) => {
-        if (!err) console.log(`Notification job created: ${pushCode.id}`);
+    console.log(`Notification job created: ${pushCode.id}`);
     }
 );
 
@@ -17,4 +17,3 @@ pushCode.on('complete', () => {
 }).on('failed', () => {
     console.log('Notification job failed');
 });
-

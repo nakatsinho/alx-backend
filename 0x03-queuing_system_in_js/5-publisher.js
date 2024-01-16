@@ -6,11 +6,11 @@ client.on('error', (err) => console.log(`Redis client not connected to the serve
 
 client.on('connect', () => {
     console.log('Redis client connected to the server');
-}).on('error', (err) => {
+}).on('error',(err) => {
     console.log(`Redis client not connected to the server: ${err}`);
 });
 
-function publishMessage(message, time) {
+const publishMessage = (message, time) => {
     setTimeout(() => {
         console.log(`About to send ${message}`);
         client.publish('holberton school channel', message);

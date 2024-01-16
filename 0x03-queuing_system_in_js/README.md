@@ -3,8 +3,7 @@
 
 Back-endJavaScriptES6RedisNodeJSExpressJSKue
 
--   By: Johann Kerbrat, Engineering Manager at Uber Works
--   Weight: 1
+-   By: Dev Nderitu
 
 ![](https://s3.amazonaws.com/alx-intranet.hbtn.io/uploads/medias/2020/1/1486e02a78cdf7b4557c.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUSBVO6H7D%2F20220815%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220815T195509Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=35ec3a36d25c73a134fb0de3065010e6c5f93cba917db5eebd0ee999f3a10511)
 
@@ -47,9 +46,56 @@ Required Files for the Project
 
 Click to show/hide file contents
 
+```
+{
+    "name": "queuing_system_in_js",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "lint": "./node_modules/.bin/eslint",
+      "check-lint": "lint [0-9]*.js",
+      "test": "./node_modules/.bin/mocha --require @babel/register --exit",
+      "dev": "nodemon --exec babel-node --presets @babel/preset-env"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "chai-http": "^4.3.0",
+      "express": "^4.17.1",
+      "kue": "^0.11.6",
+      "redis": "^2.8.0"
+    },
+    "devDependencies": {
+      "@babel/cli": "^7.8.0",
+      "@babel/core": "^7.8.0",
+      "@babel/node": "^7.8.0",
+      "@babel/preset-env": "^7.8.2",
+      "@babel/register": "^7.8.0",
+      "eslint": "^6.4.0",
+      "eslint-config-airbnb-base": "^14.0.0",
+      "eslint-plugin-import": "^2.18.2",
+      "eslint-plugin-jest": "^22.17.0",
+      "nodemon": "^2.0.2",
+      "chai": "^4.2.0",
+      "mocha": "^6.2.2",
+      "request": "^2.88.0",
+      "sinon": "^7.5.0"
+    }
+  }
+```
+
 ### `.babelrc`
 
 Click to show/hide file contents
+
+```
+{
+  "presets": [
+    "@babel/preset-env"
+  ]
+}
+```
 
 ### and...
 
@@ -115,7 +161,28 @@ Requirements:
 -   Directory: `0x03-queuing_system_in_js`
 -   File: `README.md, dump.rdb`
 
- Done? Help Get a sandbox
+**----------------SOLUTION----------------**
+
+```
+nderitu@ndech:~/redis-6.0.10$ src/redis-cli ping
+PONG
+nderitu@ndech:~/redis-6.0.10$ src/redis-cli
+127.0.0.1:6379> set Holberton School
+OK
+127.0.0.1:6379> get Holberton
+"School"
+127.0.0.1:6379> BGSAVE
+Background saving started
+127.0.0.1:6379> CONFIG GET dir
+1) "dir"
+2) "/home/nderitu/redis-6.0.10"
+127.0.0.1:6379> set Holberton School
+OK
+127.0.0.1:6379> get Holberton
+"School"
+127.0.0.1:6379>
+```
+Done? Help Get a sandbox
 
 ### 1\. Node Redis Client
 
@@ -178,6 +245,24 @@ bob@dylan:~$
 -   GitHub repository: `alx-backend`
 -   Directory: `0x03-queuing_system_in_js`
 -   File: `0-redis_client.js`
+
+**---------------CODE IMPLEMENTATION---------------------**
+
+```
+import redis from 'redis';
+
+const client = redis.createClient();
+
+// client = redis.createClient();
+
+client.on('error', (err) => console.log(`Redis client not connected to the server: ${err}`));
+
+client.on('connect', () => {
+    console.log('Redis client connected to the server');
+}).on('error', (err) => {
+    console.log(`Redis client not connected to the server: ${err}`);
+});
+```
 
  Done? Help Get a sandbox
 
@@ -439,7 +524,12 @@ Now you have a basic Redis-based queuing system where you have a process to gene
 -   Directory: `0x03-queuing_system_in_js`
 -   File: `5-subscriber.js, 5-publisher.js`
 
- Done? Help Get a sandbox
+**-------------------CODE IMPLEMENTATION----------------------**
+
+`5-subscriber.js`
+
+It creates a Redis client that subscribes to the 'holberton school channel',
+logs received messages, and handles the 'KILL_SERVER' command by unsubscribing and quitting the client.
 
 ### 6\. Create the Job creator
 

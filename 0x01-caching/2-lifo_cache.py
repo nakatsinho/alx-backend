@@ -9,12 +9,12 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 class LIFOCache(BaseCaching):
     """
-     class LIFOCache that inherits from BaseCaching and is a caching system
+    class LIFOCache that inherits from BaseCaching and is a caching system
     """
 
     def __init__(self):
         """
-        Init method
+        init method
         """
         super().__init__()
         self.key_indexes = []
@@ -22,7 +22,7 @@ class LIFOCache(BaseCaching):
     def put(self, key, item):
         """
         Must assign to the dictionary self.cache_data
-        the item value for the key key.
+        the item value for the key
         """
         if key and item:
             if len(self.cache_data) >= self.MAX_ITEMS:
